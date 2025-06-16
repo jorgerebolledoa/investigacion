@@ -1,0 +1,7 @@
+farthest point voronoi diagram 
+intentar paralelizar 
+.
+tambien convien y podemos 
+compara  version recursiva  radio y tiempo 
+vs version paralela no optima radioAproximado y tiempo 
+y ver que tan distintos son los radios y cuanto mas rapido es el paralelo
