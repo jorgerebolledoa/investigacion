@@ -117,7 +117,7 @@ if __name__ == "__main__":
     
     # Generar puntos de prueba (solo en rank 0 para evitar duplicados)
     if rank == 0:
-        points = [(random.uniform(0, 100), random.uniform(0, 100)) for _ in range(500)]
+        points = [(random.uniform(0, 100), random.uniform(0, 100)) for _ in range(100)]
         print(f"Calculando círculo mínimo para {len(points)} puntos usando {comm.Get_size()} nodos...")
     else:
         points = None
@@ -126,30 +126,43 @@ if __name__ == "__main__":
     points = comm.bcast(points, root=0)
     
     # Ejecutar algoritmo distribuido
-    s = time.time()
-    k = comm.Get_size()
-    result = distributed_MEC(points, k)
-    distributed_time = (time.time() - s) * 1e3
+    resultado_invalido = True
+    while(resultado_invalido):
+        s = time.time()
+        k = comm.Get_size()
+        result = distributed_MEC(points, k)
+        distributed_time = (time.time() - s) * 1e3
+        if result!=None and result.radius != 0:
+            resultado_invalido = False
     
     if rank == 0:
         print(f"Tiempo distribuido: {distributed_time} ms")
         print("\nResultado Distribuido:")
         print(f"Centro: {result.center}, Radio: {result.radius}\n")
+        #cantidad de puntos fuera de la circunferencia
+        puntosdentro = 0
+        for i in range(len(points)):
+            if result.contains(points[i]):
+                puntosdentro += 1
+        print(f"Puntos dentro de la circunferencia: {puntosdentro} de {len(points)}\n")
+                
         
-        # Guardar puntos en archivo txt
-        with open('puntos.txt', 'w') as f:
-            for point in points:
-                f.write(f"({point[0]}, {point[1]})\n")
-        print(f"Puntos guardados en 'puntos.txt'")
         
         # Ejecutar algoritmo secuencial solo en rank 0
-        s2 = time.time()
-        C = MEC(points)
-        if C is None:
-            C = Circle((0, 0), 0)
-        sequential_time = (time.time() - s2) * 1e3
+        resultado_invalido = True
+        while(resultado_invalido):
+            s2 = time.time()
+            C = MEC(points)
+            sequential_time = (time.time() - s2) * 1e3
+            if C!=None and C.radius != 0:
+                resultado_invalido = False
         print(f"Tiempo secuencial: {sequential_time} ms")
         print("Resultado Secuencial Emo Welz:")
         print(f"Centro: {C.center}, Radio: {C.radius}\n")
+        puntosdentro = 0
+        for i in range(len(points)):
+            if C.contains(points[i]):
+                puntosdentro += 1
+        print(f"Puntos dentro de la circunferencia: {puntosdentro} de {len(points)}\n")
         
         print(f"Speedup: {sequential_time / distributed_time:.2f}x")
