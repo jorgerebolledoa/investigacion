@@ -117,14 +117,15 @@ if __name__ == "__main__":
     
     # Generar puntos de prueba (solo en rank 0 para evitar duplicados)
     if rank == 0:
-        points = [(random.uniform(0, 100), random.uniform(0, 100)) for _ in range(500)]
+        points = [(round(random.uniform(0, 100), 2), round(random.uniform(0, 100), 2)) for _ in range(200)]
         print(f"Calculando círculo mínimo para {len(points)} puntos usando {comm.Get_size()} nodos...")
     else:
         points = None
     
-    # Distribuir los puntos a todos los procesos
-    points = comm.bcast(points, root=0)
+        # Distribuir los puntos a todos los procesos
+    #points = comm.bcast(points, root=0)
     
+    """
     # Ejecutar algoritmo distribuido
     s = time.time()
     k = comm.Get_size()
@@ -153,3 +154,11 @@ if __name__ == "__main__":
         print(f"Centro: {C.center}, Radio: {C.radius}\n")
         
         print(f"Speedup: {sequential_time / distributed_time:.2f}x")
+    """
+    
+    # Solo guardar los puntos en archivo
+    if rank == 0:
+        with open('puntos.txt', 'w') as f:
+            for point in points:
+                f.write(f"({point[0]}, {point[1]})\n")
+        print(f"Puntos guardados en 'puntos.txt'")

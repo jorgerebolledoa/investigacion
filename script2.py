@@ -111,21 +111,35 @@ def distributed_MEC(points, k):
     else:
         return None
 
+def load_points_from_file(filename):
+    """Carga puntos desde un archivo de texto"""
+    points = []
+    with open(filename, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                # Formato: (x, y)
+                # Remover paréntesis y dividir por coma
+                coords = line.replace('(', '').replace(')', '').split(', ')
+                x = float(coords[0])
+                y = float(coords[1])
+                points.append((x, y))
+    return points
+
 if __name__ == "__main__":
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     
-    # Generar puntos de prueba (solo en rank 0 para evitar duplicados)
+    # Cargar puntos desde archivo (solo en rank 0 para evitar duplicados)
     if rank == 0:
-        points = [(random.uniform(0, 100), random.uniform(0, 100)) for _ in range(100)]
+        points = load_points_from_file('puntos.txt')
         print(f"Calculando círculo mínimo para {len(points)} puntos usando {comm.Get_size()} nodos...")
     else:
         points = None
-    
+
     # Distribuir los puntos a todos los procesos
     points = comm.bcast(points, root=0)
-    
-    # Ejecutar algoritmo distribuido
+
     resultado_invalido = True
     while(resultado_invalido):
         s = time.time()
@@ -145,8 +159,6 @@ if __name__ == "__main__":
             if result.contains(points[i]):
                 puntosdentro += 1
         print(f"Puntos dentro de la circunferencia: {puntosdentro} de {len(points)}\n")
-                
-        
         
         # Ejecutar algoritmo secuencial solo en rank 0
         resultado_invalido = True
@@ -156,6 +168,7 @@ if __name__ == "__main__":
             sequential_time = (time.time() - s2) * 1e3
             if C!=None and C.radius != 0:
                 resultado_invalido = False
+
         print(f"Tiempo secuencial: {sequential_time} ms")
         print("Resultado Secuencial Emo Welz:")
         print(f"Centro: {C.center}, Radio: {C.radius}\n")
