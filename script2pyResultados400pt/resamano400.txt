@@ -1,0 +1,129 @@
+------------------------------1nodos----------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 1 nodos...
+Tiempo distribuido: 411.79418563842773 ms
+
+Resultado Distribuido:
+Centro: (17.361496203118442, 81.03350379688156), Radio: 47.30332771063786
+
+Puntos dentro de la circunferencia: 62 de 200
+
+Tiempo secuencial: 1550.3900051116943 ms
+Resultado Secuencial Emo Welz:
+Centro: [23.78916302765648, 4615.754912663756], Radio: 4615.521706390793
+
+Puntos dentro de la circunferencia: 200 de 200
+
+Speedup: 3.76x
+-----------------------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 2 nodos...
+Tiempo distribuido: 34.6677303314209 ms
+
+Resultado Distribuido:
+Centro: (136.2660735010876, 196.32643007689353), Radio: 98.6445834543799
+
+Puntos dentro de la circunferencia: 0 de 200
+
+Tiempo secuencial: 914.574146270752 ms
+Resultado Secuencial Emo Welz:
+Centro: [-127.59371806701901, 44.154742911382], Radio: 231.2546038507987
+
+Puntos dentro de la circunferencia: 199 de 200
+
+Speedup: 26.38x
+-------------------------------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 3 nodos...
+Tiempo distribuido: 16.219139099121094 ms
+
+Resultado Distribuido:
+Centro: (19.377623933437626, 50.559999999999995), Radio: 33.68737606656238
+
+Puntos dentro de la circunferencia: 55 de 200
+
+Tiempo secuencial: 826.8299102783203 ms
+Resultado Secuencial Emo Welz:
+Centro: (50.81, 47.585), Radio: 66.89700759376312
+
+Puntos dentro de la circunferencia: 198 de 200
+
+Speedup: 50.98x
+--------------------------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 4 nodos...
+Tiempo distribuido: 17.386674880981445 ms
+
+Resultado Distribuido:
+Centro: (27.737143778758373, -47.39451168990543), Radio: 148.04890988167625
+
+Puntos dentro de la circunferencia: 192 de 200
+
+Tiempo secuencial: 198.74858856201172 ms
+Resultado Secuencial Emo Welz:
+Centro: [812.4353325370439, 43.328786871624416], Radio: 812.1553448137272
+
+Puntos dentro de la circunferencia: 200 de 200
+
+Speedup: 11.43x
+---------------------------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 5 nodos...
+Tiempo distribuido: 10.469198226928711 ms
+
+Resultado Distribuido:
+Centro: [-2067.760018044615, 158.98366949393107], Radio: 2207.0838052322815
+
+Puntos dentro de la circunferencia: 200 de 200
+
+Tiempo secuencial: 728.7192344665527 ms
+Resultado Secuencial Emo Welz:
+Centro: [812.4353325370444, 43.328786871624416], Radio: 812.1553448137275
+
+Puntos dentro de la circunferencia: 198 de 200
+
+Speedup: 69.61x
+-----------------------------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 6 nodos...
+Tiempo distribuido: 7.505893707275391 ms
+
+Resultado Distribuido:
+Centro: [-3201.15623635039, -44.82591978129949], Radio: 3550.295765598926
+
+Puntos dentro de la circunferencia: 200 de 200
+
+Tiempo secuencial: 405.9133529663086 ms
+Resultado Secuencial Emo Welz:
+Centro: [34.83997947564925, 1085.0190575300649], Radio: 1084.944912784572
+
+Puntos dentro de la circunferencia: 200 de 200
+
+Speedup: 54.08x
+-------------------------------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 7 nodos...
+Tiempo distribuido: 2.9265880584716797 ms
+
+Resultado Distribuido:
+Centro: (45.26045722964362, -37.44459677145743), Radio: 136.56093419843256
+
+Puntos dentro de la circunferencia: 191 de 200
+
+Tiempo secuencial: 1029.4110774993896 ms
+Resultado Secuencial Emo Welz:
+Centro: (53.065000000000005, 50.559999999999995), Radio: 67.37475213312476
+
+Puntos dentro de la circunferencia: 197 de 200
+
+Speedup: 351.74x
+-----------------------------------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 8 nodos...
+Tiempo distribuido: 2.5691986083984375 ms
+
+Resultado Distribuido:
+Centro: [-47.49960652403229, 136.39334455858454], Radio: 321.29156228848484
+
+Puntos dentro de la circunferencia: 200 de 200
+
+Tiempo secuencial: 192.70753860473633 ms
+Resultado Secuencial Emo Welz:
+Centro: [55.40124817057074, 115.63609748635045], Radio: 121.9794199732174
+
+Puntos dentro de la circunferencia: 198 de 200
+
+Speedup: 75.01x
+-----------------------------------------------------------------------------------------------
