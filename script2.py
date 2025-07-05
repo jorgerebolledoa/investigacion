@@ -111,8 +111,7 @@ def distributed_MEC(points, k):
     else:
         return None
 
-def load_points_from_file(filename):
-    """Carga puntos desde un archivo de texto"""
+def leerpuntos(filename):
     points = []
     with open(filename, 'r') as f:
         for line in f:
@@ -132,7 +131,7 @@ if __name__ == "__main__":
     
     # Cargar puntos desde archivo (solo en rank 0 para evitar duplicados)
     if rank == 0:
-        points = load_points_from_file('puntos.txt')
+        points = leerpuntos('puntos.txt')
         print(f"Calculando círculo mínimo para {len(points)} puntos usando {comm.Get_size()} nodos...")
     else:
         points = None
@@ -169,9 +168,11 @@ if __name__ == "__main__":
             if C!=None and C.radius != 0:
                 resultado_invalido = False
 
-        print(f"Tiempo secuencial: {sequential_time} ms")
+        print("Tiempo secuencial(ms): ", sequential_time)
         print("Resultado Secuencial Emo Welz:")
-        print(f"Centro: {C.center}, Radio: {C.radius}\n")
+        print("Centro: ", C.center)
+        print(", Radio: ", C.radius)
+        print("\n")
         puntosdentro = 0
         for i in range(len(points)):
             if C.contains(points[i]):
