@@ -24,7 +24,7 @@ def getCircleCenter(bx, by, cx, cy):
 def circleFrom(a, b, c):
     i = getCircleCenter(b[0] - a[0], b[1] - a[1], c[0] - a[0], c[1] - a[1])
     if i is None:
-        return trivial([a, b, c], 2)  # Devuelve el círculo más pequeño que contiene los 3 puntos
+        return trivial([a, b, c], 2)  #Devuelve el círculo que contiene los 3 puntos
     i[0] += a[0]
     i[1] += a[1]
     radius = math.dist(i, a)
@@ -77,26 +77,32 @@ def distributed_MEC(points, k):
             print(f"Error: Se requieren {k} procesos pero hay {size} disponibles")
         return Circle((0,0), 0)
     
-    # Dividir los puntos entre los procesos
+    #Dividir los puntos entre los procesos
     chunk_size = len(points) // k
     local_points = points[rank*chunk_size : (rank+1)*chunk_size]
-    if rank == k-1:  # El último proceso toma los puntos restantes
+    if rank == k-1:  #El ultimo proceso toma los puntos restantes
         local_points = points[rank*chunk_size:]
     
-    # Cada proceso calcula su círculo mínimo local
-    local_circle = MEC(local_points)
     
-    # Recopilar todos los círculos locales en el proceso 0
-    all_circles = comm.gather(local_circle, root=0)
+    local_circle = MEC(local_points)#Cada proceso calcula su circulo mínimo local
+    
+    
+    all_circles = comm.gather(local_circle, root=0)#Recopilar todos los círculos locales en el proceso 0
     
     if rank == 0:
-        # Filtrar círculos None
-        valid_circles = [c for c in all_circles if c is not None]
+        #Filtrar círculos None
+        valid_circles = []
+        for c in all_circles:
+            if c is not None:
+                valid_circles.append(c)
         
         if not valid_circles:
             return Circle((0,0), 0)
         
-        # Recoger puntos de los círculos
+        if not valid_circles:
+            return Circle((0,0), 0)
+        
+        #Recoger puntos de los círculos
         boundary_points = []
         for circle in valid_circles:
             boundary_points.append(circle.center)
@@ -105,9 +111,12 @@ def distributed_MEC(points, k):
             boundary_points.append((circle.center[0], circle.center[1] + circle.radius))
             boundary_points.append((circle.center[0], circle.center[1] - circle.radius))
         
-        # Calcular el círculo mínimo que engloba todos estos puntos
+        #Calcular el círculo mínimo que engloba todos estos puntos
         final_circle = MEC(boundary_points)
-        return final_circle if final_circle is not None else Circle((0,0), 0)
+        if final_circle is not None:
+            return final_circle
+        else:
+            return Circle((0,0), 0)
     else:
         return None
 
@@ -115,14 +124,17 @@ if __name__ == "__main__":
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     
-    # Generar puntos de prueba (solo en rank 0 para evitar duplicados)
+    #Generar puntos de prueba (solo en rank 0 para evitar duplicados)
     if rank == 0:
-        points = [(round(random.uniform(0, 100), 2), round(random.uniform(0, 100), 2)) for _ in range(200)]
-        print(f"Calculando círculo mínimo para {len(points)} puntos usando {comm.Get_size()} nodos...")
+        points = []
+        for i in range(0, 200):
+            points.append((round(random.uniform(0, 100), 2), round(random.uniform(0, 100), 2)))
+
+        print("Calculando círculo mínimo para", len(points), "puntos usando", comm.Get_size(), "nodos...")
     else:
         points = None
     
-        # Distribuir los puntos a todos los procesos
+    #Distribuir los puntos a todos los procesos
     #points = comm.bcast(points, root=0)
     
     """
@@ -160,5 +172,5 @@ if __name__ == "__main__":
     if rank == 0:
         with open('puntos.txt', 'w') as f:
             for point in points:
-                f.write(f"({point[0]}, {point[1]})\n")
-        print(f"Puntos guardados en 'puntos.txt'")
+                f.write("(" + str(point[0]) + ", " + str(point[1]) + ")\n")
+        print("Puntos guardados en 'puntos.txt'")
