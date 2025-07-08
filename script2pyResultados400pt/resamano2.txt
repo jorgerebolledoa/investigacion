@@ -1,0 +1,155 @@
+Calculando cÝrculo mÝnimo para 400 puntos usando 1 nodos...
+tiempo distribuido(ms):  10488.880634307861
+
+Resultado Distribuido:
+Centro:  (7.941865133147992, 79.76475791004745)
+, Radio:  44.6344247552505
+
+
+Puntos dentro de la circunferencia:  116  de  400
+
+Tiempo secuencial(ms):  8286.742210388184
+Resultado Secuencial Emo Welz:
+Centro:  [51.25232769106021, 51.868405038390584]
+, Radio:  67.58964751722542
+
+
+Puntos dentro de la circunferencia:  398  de  400
+
+Speedup:  0.7900501968993003 x
+PS D:\smc\investigacion> 
+---------------------------------------------------------------
+PS D:\smc\investigacion> mpiexec -n 2 python script2.py
+Calculando cÝrculo mÝnimo para 400 puntos usando 2 nodos...
+tiempo distribuido(ms):  759.882926940918
+
+Resultado Distribuido:
+Centro:  (61.838664186119736, 0.2600637794708973)
+, Radio:  103.76865353242653
+
+
+Puntos dentro de la circunferencia:  397  de  400
+
+Tiempo secuencial(ms):  9570.410251617432
+Resultado Secuencial Emo Welz:
+Centro:  [-601.5592586943309, 55.6739505796218]
+, Radio:  702.4325159439403
+
+
+Puntos dentro de la circunferencia:  399  de  400
+
+Speedup:  12.594585181884927 x
+--------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 3 nodos...
+Ejecutando algoritmo distribuido...
+tiempo distribuido(ms):  452.5339603424072
+
+Resultado Distribuido:
+Centro:  (57.379999999999995, 51.23)
+, Radio:  60.8685156710758
+
+
+Puntos dentro de la circunferencia:  386  de  400
+
+Ejecutando algoritmo secuencial...
+Ejecutando algoritmo secuencial...
+Ejecutando algoritmo secuencial...
+Ejecutando algoritmo secuencial...
+Ejecutando algoritmo secuencial...
+Tiempo secuencial(ms):  635.6325149536133
+Resultado Secuencial Emo Welz:
+Centro:  [51.480010287693844, 58.64660536234254]
+, Radio:  72.39855385643102
+
+
+Puntos dentro de la circunferencia:  398  de  400
+
+Speedup:  1.4046073237744756 x
+------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 4 nodos...
+tiempo distribuido(ms):  245.46194076538086
+
+Resultado Distribuido:
+Centro:  (55.079750797241246, 49.655)
+, Radio:  63.18839672507757
+
+
+Puntos dentro de la circunferencia:  390  de  400
+
+Tiempo secuencial(ms):  3289.0615463256836
+Resultado Secuencial Emo Welz:
+Centro:  [-601.5592586943309, 55.67395057962182]
+, Radio:  702.4325159439403
+
+
+Puntos dentro de la circunferencia:  399  de  400
+
+Speedup:  13.399476660495639 x
+-----------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 5 nodos...
+Resultado Distribuido:
+Centro:  [1058.4907524457524, 1052.3407524457523]
+, Radio:  1459.4597303702676
+
+
+Puntos dentro de la circunferencia:  364  de  400
+
+Tiempo secuencial(ms):  11974.132299423218
+Resultado Secuencial Emo Welz:
+Traceback (most recent call last):
+  File "D:\smc\investigacion\script2.py", line 179, in <module>
+    print("Centro: ", C.center)
+                      ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'center'}
+-------------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 6 nodos...
+tiempo distribuido(ms):  57.91974067687988
+
+Resultado Distribuido:
+Centro:  (25.32959476042264, 16.98459476042264)
+, Radio:  43.1977263579925
+
+
+Puntos dentro de la circunferencia:  154  de  400
+
+Tiempo secuencial(ms):  10260.846138000488
+Resultado Secuencial Emo Welz:
+Traceback (most recent call last):
+  File "D:\smc\investigacion\script2.py", line 179, in <module>
+    print("Centro: ", C.center)
+                      ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'center'
+---------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 7 nodos...
+tiempo distribuido(ms):  36.48877143859863
+
+Resultado Distribuido:
+Centro:  (57.379999999999995, 51.230000000000004)
+, Radio:  60.8685156710758
+
+
+Puntos dentro de la circunferencia:  386  de  400
+
+Tiempo secuencial(ms):  9391.67594909668
+Resultado Secuencial Emo Welz:
+Traceback (most recent call last):
+  File "D:\smc\investigacion\script2.py", line 179, in <module>
+    print("Centro: ", C.center)
+                      ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'center'
+-----------------------------------------------------------------
+Calculando cÝrculo mÝnimo para 400 puntos usando 8 nodos...
+tiempo distribuido(ms):  23.388385772705078
+
+Resultado Distribuido:
+Centro:  (54.112075206597, 125.51963388882001)
+, Radio:  131.30455944992968
+
+
+Puntos dentro de la circunferencia:  400  de  400
+
+Tiempo secuencial(ms):  12454.931259155273
+Resultado Secuencial Emo Welz:
+Traceback (most recent call last):
+  File "D:\smc\investigacion\script2.py", line 179, in <module>
+    print("Centro: ", C.center)

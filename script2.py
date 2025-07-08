@@ -18,7 +18,7 @@ def getCircleCenter(bx, by, cx, cy):
     c = cx * cx + cy * cy
     d = bx * cy - by * cx
     if d == 0:
-        return None
+        return (0,0)
     return [(cy * b - by * c) / (2 * d), (bx * c - cx * b) / (2 * d)]
 
 def circleFrom(a, b, c):
@@ -74,7 +74,7 @@ def distributed_MEC(points, k):
     
     if size != k:
         if rank == 0:
-            print(f"Error: Se requieren {k} procesos pero hay {size} disponibles")
+            print("Error: Se requieren", k, "procesos pero hay", size, "disponibles")
         return Circle((0,0), 0)
     
     #Dividir los puntos entre los procesos
@@ -114,7 +114,7 @@ def distributed_MEC(points, k):
         else:
             return Circle((0,0), 0)
     else:
-        return None
+        return Circle((0,0), 0)
 
 def leerpuntos(filename):
     points = []
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     #Cargar puntos desde archivo
     if rank == 0:
         points = leerpuntos('puntos.txt')
-        print(f"Calculando círculo mínimo para {len(points)} puntos usando {comm.Get_size()} nodos...")
+        print("Calculando círculo mínimo para", len(points),  "puntos usando", comm.Get_size(), "nodos...")
     else:
         points = None
 
@@ -144,13 +144,13 @@ if __name__ == "__main__":
     points = comm.bcast(points, root=0)
 
     resultado_invalido = True
-    while(resultado_invalido):
-        s = time.time()
-        k = comm.Get_size()
-        result = distributed_MEC(points, k)
-        distributed_time = (time.time() - s) * 1e3
-        if result!=None and result.radius != 0:
-            resultado_invalido = False
+    #while(resultado_invalido):
+    s = time.time()
+    k = comm.Get_size()
+    result = distributed_MEC(points, k)
+    distributed_time = (time.time() - s) * 1e3
+        #if result!=None and result.radius != 0:
+            #resultado_invalido = False
     
     if rank == 0:
         print("tiempo distribuido(ms): ", distributed_time)
@@ -167,12 +167,12 @@ if __name__ == "__main__":
         
         #Ejecutar algoritmo secuencial solo en rank 0
         resultado_invalido = True
-        while(resultado_invalido):
-            s2 = time.time()
-            C = MEC(points)
-            sequential_time = (time.time() - s2) * 1e3
-            if C!=None and C.radius != 0:
-                resultado_invalido = False
+        #while(resultado_invalido):
+        s2 = time.time()
+        C = MEC(points)
+        sequential_time = (time.time() - s2) * 1e3
+            #if C!=None and C.radius != 0:
+                #resultado_invalido = False
 
         print("Tiempo secuencial(ms): ", sequential_time)
         print("Resultado Secuencial Emo Welz:")

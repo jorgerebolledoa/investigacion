@@ -294,7 +294,7 @@ def analisis_detallado(df):
 if __name__ == "__main__":
     # Cargar y procesar los datos
     print("Cargando datos del archivo resamano400.txt...")
-    df = extraer_datos_resultados('resamano400.txt')
+    df = extraer_datos_resultados('resamano2.txt')
     
     if df.empty:
         print("Error: No se pudieron extraer datos del archivo.")

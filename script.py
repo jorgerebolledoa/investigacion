@@ -127,7 +127,7 @@ if __name__ == "__main__":
     #Generar puntos de prueba (solo en rank 0 para evitar duplicados)
     if rank == 0:
         points = []
-        for i in range(0, 200):
+        for i in range(0, 400):
             points.append((round(random.uniform(0, 100), 2), round(random.uniform(0, 100), 2)))
 
         print("Calculando círculo mínimo para", len(points), "puntos usando", comm.Get_size(), "nodos...")
